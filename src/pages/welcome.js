@@ -3,6 +3,7 @@ import { withRouter, Link } from 'react-router-dom';
 import '../statics/main.css'
 import logo from '../images/breathingai_logo.png'
 import Description from './description';
+import ColorTest from './colortest';
 
 class welcome extends Component {
     constructor(props) {
@@ -23,9 +24,9 @@ class welcome extends Component {
     render() {
         return (
 
-
+     
             this.state.showComponent ?
-                <Description /> :
+                <ColorTest /> :
 
 
 
@@ -35,7 +36,6 @@ class welcome extends Component {
                         <h1 style={{ fontSize: '60px' }}>Find Your Calming Colors</h1>
 
                         <b onClick={this._onButtonClick} >Start</b>
-
                     </div>
                 </div>
         )
