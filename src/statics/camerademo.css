@@ -1,27 +1,34 @@
 html, body {
-  width: 100%;
-  height: 100%
+
 }
+
 body{
-  background-image: url(../images/breathing.ai_personalization_of_screens.jpg);
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
+  
 }
-h1{
+
+.camerabg{
+  background-image: url(../images/breathing.ai_personalization_of_screens.jpg);
+  height: 100vh;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+}
+
+.cameraDes{
+  
+  text-align: center;
   position: absolute;
-  top: 50%;
+  /* top: 40%; */
   left: 50%;
-  display: block;
-  height: 50px;
-  margin: 140px 0 0 -220px;
-  line-height: 50px;
-  vertical-align: middle;
+  transform: translate(-50%, -50%);
+  position: relative;
   text-align: center;
   font-family: Arial;
   font-size: 40px;
   color: #FFF;
+  /* margin: auto; */
+  display: block;
 }
 
 video {
@@ -29,13 +36,11 @@ video {
   display: block;
   margin-left: auto;
   margin-right: auto;
-  object-fit: fill;
 }
 
 button{
-  position:absolute;
+  position: relative;;
   left:50%;
-  bottom:80px;
   transform: translate(-50%,-50%);
   width:400px;
   height:60px;

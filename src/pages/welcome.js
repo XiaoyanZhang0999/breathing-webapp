@@ -33,9 +33,9 @@ class welcome extends Component {
                     <div class="hero-text">
                         <a href="https://breathing.ai/" /><img src={logo} width="70" height="90" />
                         <h1 style={{ fontSize: '60px' }}>Find Your Calming Colors</h1>
-
-                        <b onClick={this._onButtonClick} >Start</b>
-
+                        <div class="button">
+                            <b onClick={this._onButtonClick} >Start</b>
+                        </div>
                     </div>
                 </div>
         )

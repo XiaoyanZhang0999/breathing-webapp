@@ -1,5 +1,10 @@
 import React, { Component } from "react"
 import '../statics/description.css'
+import img1 from '../images/step_1.png'
+import img2 from '../images/step_2.png'
+import img3 from '../images/step_3.png'
+
+
 import Camera from './camera'
 
 class description extends Component {
@@ -25,7 +30,7 @@ class description extends Component {
             this.state.showComponent ?
                 <Camera /> :
 
-                <div>
+                <div class="descriptionbg">
                     <div class="container">
                         <div class="card">
                             <h3 class="title"><b>Step One</b></h3>
@@ -37,13 +42,7 @@ class description extends Component {
                                 <p>Allow the webcam to lock onto your forehead and start analyzing your heart rate.</p>
                             </div>
                             <div class="circle">
-                                <svg version="1.1" xmlns="http://www.w3.org/2000/svg">
-                                    <img
-                                        src="images/step_1.svg"
-                                        alt="locking on to your face"
-                                        height="200px"
-                                        width="200px" />
-                                </svg>
+                                <img class="stroke" src={img1} width="200" height="200" />
                             </div>
                         </div>
                         <div class="card">
@@ -56,13 +55,7 @@ class description extends Component {
                                 <p>After detecting of heart rate (in beats per minute/bpm), please keep looking at colors and fonts only.</p>
                             </div>
                             <div class="circle">
-                                <svg version="1.1" xmlns="http://www.w3.org/2000/svg">
-                                    <img class="stroke"
-                                        src="images/step_2.svg"
-                                        alt="analyzing heart rate"
-                                        height="200px"
-                                        width="200px" />
-                                </svg>
+                                <img class="stroke" src={img2} width="200" height="200" />
                             </div>
                         </div>
                         <div class="card">
@@ -71,13 +64,7 @@ class description extends Component {
                                 <p>After the display, see the results of how colors and fonts raise or lower your heart rate (as bpm)!</p>
                             </div>
                             <div class="circle">
-                                <svg version="1.1" xmlns="http://www.w3.org/2000/svg">
-                                    <img class="stroke"
-                                        src="images/step_3.svg"
-                                        alt="reviewing your results"
-                                        height="200px"
-                                        width="200px" />
-                                </svg>
+                                <img class="stroke" src={img3} width="200" height="200" />
                             </div>
                         </div>
 
@@ -85,6 +72,7 @@ class description extends Component {
                     </div>
                     <c onClick={this._onButtonClick}>Start</c>
                 </div>
+
 
         )
     }

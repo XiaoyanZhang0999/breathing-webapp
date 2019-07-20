@@ -1,5 +1,5 @@
 import React, { Component } from "react"
-//import '../statics/camerademo.css'
+import '../statics/camerademo.css'
 
 //IMPORTANT: THIS CSS CAUSING CONFLICT
 
@@ -10,9 +10,9 @@ class camera extends Component {
             var div = document.querySelector("#counter");
             var count = div.textContent * 1 - 1;
             div.textContent = count;
-            if (count <= 0) {
-                window.location.replace('randombackground.html');
-            }
+            //if (count <= 0) {
+            //  window.location.replace('randombackground.html');
+            //}
         }, 1000);
 
         const vid = document.querySelector('video');
@@ -22,16 +22,16 @@ class camera extends Component {
                 return vid.play(); // returns a Promise
             })
 
-        /*
-        .then(() => { // enable the button
-            const btn = document.querySelector('button');
-            btn.disabled = false;
-            btn.onclick = e => {
-                takeASnap()
-                    .then(download);
-            };
-        });
-        */
+
+            .then(() => { // enable the button
+                const btn = document.querySelector('button');
+                btn.disabled = false;
+                btn.onclick = e => {
+                    takeASnap()
+                        .then(download);
+                };
+            });
+
 
         // IMPORTANT: BUTTON IS CAUSING PROBLEM AND NEEDED TO BE FIXED
 
@@ -53,7 +53,9 @@ class camera extends Component {
             document.body.appendChild(a);
             a.click();
         }
+
     }
+
 
 
 
@@ -61,10 +63,13 @@ class camera extends Component {
 
 
         return (
-            <div><h1>Keep Calm and Breathe!</h1>
+            <div class="camerabg">
 
                 <video id="video" width="600" height="500" autoplay></video>
 
+                <h1 class='cameraDes'>Keep Calm and Breathe!</h1>
+
+                <button onclick={this.takeASnap}> click me </button>
                 <div id="counter">15</div>
 
 
