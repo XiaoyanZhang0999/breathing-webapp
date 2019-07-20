@@ -50,23 +50,27 @@ class CameraFeed extends React.Component {
   
   render() {
     const videoConstraints = {
-      width: 640,
-      height: 480,
+      width: 480,
+      height: 640,
       facingMode: "user"
     };
     const { src } = this.state;
 
     return     (
-       <div>
-        <Webcam
-          audio={false}
-          height={350}
-          ref={this.setRef}
-          screenshotFormat="image/jpeg"
-          width={350}
-          videoConstraints={videoConstraints}
-        />
-        <img id="feed" src={src}></img>
+       <div >
+          <div class="imgContainer">
+            <Webcam
+              audio={false}
+              height={640}
+              ref={this.setRef}
+              screenshotFormat="image/jpeg"
+              width={480}
+              videoConstraints={videoConstraints}
+            />  
+          </div>
+          <div class="imgContainer">
+            <img id="feed" src={src}></img>
+        </div>
       </div>);
   }
 }

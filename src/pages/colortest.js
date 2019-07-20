@@ -18,7 +18,7 @@ class ColorTest extends Component {
 
     render() {
         return (<div >
-            <div > <Colors/></div>
+            <div> <Colors/></div>
             <div > <CameraFeed/></div></div>
         )
     }
