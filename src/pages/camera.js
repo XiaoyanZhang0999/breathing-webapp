@@ -1,18 +1,28 @@
 import React, { Component } from "react"
 import '../statics/camerademo.css'
 
-//IMPORTANT: THIS CSS CAUSING CONFLICT
 
 class camera extends Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            showComponent: false,
+        };
+        this._onTimeUp = this._onTimeUp.bind(this);
+    }
+
+
+
 
     componentDidMount() {
         setInterval(function () {
             var div = document.querySelector("#counter");
             var count = div.textContent * 1 - 1;
             div.textContent = count;
-            //if (count <= 0) {
-            //  window.location.replace('randombackground.html');
-            //}
+            if (count <= 0) {
+                window.location.replace('TestStart');
+            }
         }, 1000);
 
         const vid = document.querySelector('video');
@@ -56,6 +66,13 @@ class camera extends Component {
 
     }
 
+    _onTimeUp() {
+        console.log("change!")
+        this.setState({
+            showComponent: true,
+        });
+    }
+
 
 
 
@@ -63,6 +80,9 @@ class camera extends Component {
 
 
         return (
+
+
+
             <div class="camerabg">
 
                 <video id="video" width="600" height="500" autoplay></video>

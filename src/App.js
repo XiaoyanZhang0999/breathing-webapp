@@ -7,6 +7,8 @@ import logo from './logo.svg';
 import './App.css';
 import testPage from './pages/testPage'
 import welcome from './pages/welcome'
+import ColorTest from './pages/colortest';
+
 
 
 function App() {
@@ -14,6 +16,8 @@ function App() {
     <Router>
       <div>
         <Route exact path="/" component={welcome}></Route>
+        <Route exact path="/TestStart" component={ColorTest}></Route>
+
 
       </div>
     </Router>
