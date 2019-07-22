@@ -7,12 +7,13 @@ class CameraFeed extends React.Component {
     this.webcam = webcam;
   };
 
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       src: null,
-      endpoint: "http://127.0.0.1:5000"
-    };
+      endpoint: "http://127.0.0.1:5000",
+      result:  {}   
+    }; 
   }
 
   componentDidMount() {
@@ -24,19 +25,36 @@ class CameraFeed extends React.Component {
       socket.emit('my event', { data: 'I\'m connected!' });
 
       setInterval(() => {
+        //console.log("sending frame with "+JSON.stringify(mSelf.props.testState))
         var frame = mSelf.getFrame()
-        if (frame && frame.indexOf('data:image\/jpeg') !== -1) {
+        if (mSelf.props.testState.id && frame && frame.indexOf('data:image\/jpeg') !== -1) {
           frame = frame.replace(/^data:image\/jpeg;base64,/, "");
           if (frame && frame !== "") {
-            socket.emit('frame', frame);
+            socket.emit('frame', {b64:frame,testState:mSelf.props.testState});
           }
         }
       }, 1000 / FPS);
     });
 
     socket.on('response', function (response) {
+      //console.log("response "+JSON.stringify(response))
+      let id = response.testState.id;
+      let name = ((response.testState||{}).data||{}).name;
+      let bpm = response.bpm;
+      const { result } = mSelf.state;
+
+      if(result[id]){
+        result[id].name = name || id;
+        result[id].bpm += bpm;
+        result[id].frames++;
+      }
+      else{
+        result[id]={bpm:bpm,name:name || id,frames:0};
+      }
+      console.log("result "+id)
       mSelf.setState({
-        src: 'data:image/jpeg;base64,' + response,
+        src: 'data:image/jpeg;base64,' + response.b64,
+        result:result
       });
     });
 
@@ -56,6 +74,8 @@ class CameraFeed extends React.Component {
     };
     const { src } = this.state;
 
+    const { result } = this.state;
+    console.log(JSON.stringify(result))
     return (
       <div style={{ display: 'flex' }}>
         <Webcam
@@ -68,6 +88,17 @@ class CameraFeed extends React.Component {
         />
 
         <img id="feed" src={src}></img>
+        <table>
+          <tbody>{Object.keys(result).map(function(key, index) {
+               return (
+                  <tr key = {key}>
+                      <td>{result[key].name}</td>
+                      <td>{result[key].bpm/result[key].frames}</td>
+                  </tr>
+                )
+             
+             })}</tbody>
+       </table>
       </div>);
   }
 }

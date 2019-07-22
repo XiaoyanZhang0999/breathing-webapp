@@ -14,14 +14,24 @@ class ColorTest extends Component {
 
     constructor(props) {
         super(props);
+        this.state = {
+            testState: {}
+        };
     }
 
+    onTestUpdate = (testState) => {
+        console.log(JSON.stringify(testState))
+        this.setState({
+            testState: testState
+        })
+    }
 
     render() {
+        const { testState } = this.state;
         return (
             <div >
-                <div class="randColor" > <Colors /></div>
-                <div class="camFeed" > <CameraFeed /></div>
+                <div class="randColor" > <Colors  onTestUpdate={this.onTestUpdate}/></div>
+                <div class="camFeed" > <CameraFeed testState={testState} /></div>
             </div>
         )
     }
