@@ -5,7 +5,10 @@ ADD api.py /
 
 ADD detector /detector
 ADD lib /lib
+<<<<<<< HEAD
 ADD static /static
+=======
+>>>>>>> realtimeresults
 ADD haarcascade_frontalface_alt.xml /
 
 COPY ./requirements.txt /requirements.txt
