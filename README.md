@@ -2,8 +2,11 @@
 - Integrating the firebase survey page.<br>
 - Fix the report page css. <br>
 
-## Done
+## Done:
 - Integrate all the changes from camintegration and realtimeresults branch. 7/22 <br>
+
+## Notes:
+- Make sure also download the `server` folder for the updated API.
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
