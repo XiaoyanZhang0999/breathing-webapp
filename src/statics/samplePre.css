@@ -1,10 +1,16 @@
 body{
   margin: 0;
   padding: 0;
-  background: url(../images/background.jpg);
-  background-size: cover;
-  background-position: absolute;
   font-family: 'Roboto', sans-serif;
+}
+
+.survey {
+  background: url(../images/background.jpg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+  height: 100vh;
 }
 
 .transparent-box{
@@ -64,14 +70,14 @@ p {
   cursor: pointer;
 }
 
-.container:after{
+.surveyContainer:after{
   padding: 10px 10px 10px 10px;
   content: "";
   display: table;
   clear: both;
 }
 
-.container{
+.surveyContainer{
     padding: 20px 20px 20px 20px;
 }
 
@@ -118,15 +124,14 @@ p {
 
 
 
-.column {
+.columnSurvey {
   float: left;
   width: 45%;
   padding: 20px;
   height: 300px;
 }
 
-.myButton{
-  transform: translate(-50%,-50%);
+.surveyButton{
   width:150px;
   height:60px;
   text-align: center;
@@ -137,9 +142,10 @@ p {
   background: linear-gradient(90deg,#03a9f4,#f441a5,#ffeb3b,#03a9f4);
   background-size: 400%;
   border-radius: 30px;
+  margin: 40px;
 
 }
-.myButton:hover
+.surveyButton:hover
 {
   animation: animate 8s linear infinite;
 }
@@ -155,7 +161,8 @@ p {
   }
 
 }
-.myButton:before
+
+.surveyButton:before
 {
   content: '';
   background: linear-gradient(90deg,#03a9f4,#f441a5,#ffeb3b,#03a9f4);
@@ -164,7 +171,7 @@ p {
   opacity: 0;
   transition: 0.5s;
 }
-.myButton:hover:before
+.surveyButton:hover:before
 {
   filter: blur(20px);
   opacity: 1;

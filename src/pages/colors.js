@@ -1,7 +1,18 @@
 import React, { Component } from "react"
 
 
+const colorMap = {
+    "#0000FF": "BLUE",
+    "#FF0000": "RED",
+    "#FFFF00": "YELLOW",
+    "#00FF00": "LIGHTGREEN",
+    "#999999": "GREY"
+}
+
+
 class Colors extends Component {
+
+
     constructor(props) {
         super(props);
 
@@ -14,28 +25,26 @@ class Colors extends Component {
     componentDidMount() {
         const mSelf = this;
         setInterval(() => {
+            let color = mSelf.getRandomColor();
+            let testUpdate = {
+                date: new Date().getTime(),
+                id: color,
+                data: {
+                    color: color,
+                    name: colorMap[color]
+                }
+            }
+            mSelf.props.onTestUpdate(testUpdate);
             mSelf.setState({
-                color: mSelf.getRandomColor()
+                color: color
             })
         }, 1500);
     }
 
     getRandomColor() {
         var index = Math.round(Math.random() * 5);
-        switch (index) {
-            case 1:
-                return "#0000FF"; //blue
-            case 2:
-                return "#FF0000"; //red
-            case 3:
-                return "#FFFF00"; //yellow
-            case 4:
-                return "#00FF00"; //light green
-            case 5:
-                return "#999999"; //grey
-            default:
-                return "#999999"; //grey
-        }
+        const colors = Object.keys(colorMap);
+        return colors[index - 1];
     }
 
 

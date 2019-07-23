@@ -70,7 +70,7 @@ class description extends Component {
 
 
                     </div>
-                    <c onClick={this._onButtonClick}>Start</c>
+                    <c onClick={this._onButtonClick}>Next</c>
                 </div>
 
 

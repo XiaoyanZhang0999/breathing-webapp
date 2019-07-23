@@ -87,10 +87,9 @@ class camera extends Component {
 
                 <video id="video" width="600" height="500" autoplay></video>
 
-                <h1 class='cameraDes'>Keep Calm and Breathe!</h1>
+                <h1 class='cameraDes'>Keep Calm and Breathe! Test is going to start in <div id="counter">15</div> seconds</h1>
 
-                <button onclick={this.takeASnap}> click me </button>
-                <div id="counter">15</div>
+                <button onclick={this.takeASnap}> Take a screenshot </button>
 
 
 
