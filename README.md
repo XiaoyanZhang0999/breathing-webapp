@@ -1,3 +1,8 @@
+## TODO for master branch:
+- Integrating the firebase survey page.<br>
+- Fix the report page css. <br>
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
