@@ -11,7 +11,7 @@ class CameraFeed extends React.Component {
     super(props);
     this.state = {
       src: null,
-      endpoint: "http://127.0.0.1:5000",
+      endpoint: "https://breathing.appacea.com",
       result:  {}   
     }; 
   }

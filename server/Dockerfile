@@ -5,7 +5,6 @@ ADD api.py /
 
 ADD detector /detector
 ADD lib /lib
-ADD static /static
 ADD haarcascade_frontalface_alt.xml /
 
 COPY ./requirements.txt /requirements.txt

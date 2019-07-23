@@ -26,7 +26,7 @@ def site():
 
 @socketio.on('frame')
 def handle_frame(payload):
-    print('data: ' + str(payload))
+    #print('data: ' + str(payload))
     b64 = payload['b64']
     testState = payload['testState']
 
