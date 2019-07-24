@@ -8,6 +8,7 @@ import './App.css';
 import welcome from './pages/welcome'
 import ColorTest from './pages/colortest'
 import Survey from './pages/survey'
+import Report from './pages/personalinfo'
 
 
 
@@ -18,6 +19,7 @@ function App() {
         <Route exact path="/" component={welcome}></Route>
         <Route exact path="/TestStart" component={ColorTest}></Route>
         <Route exact path="/survey" component={Survey}></Route>
+        <Route exact path='/report' component={Report}></Route>
 
 
       </div>

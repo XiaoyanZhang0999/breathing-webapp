@@ -1,6 +1,8 @@
 import React, { Component } from "react"
 import '../statics/samplePre.css'
 import Report from './report';
+import Personalinfo from './personalinfo'
+import { Redirect } from 'react-router-dom'
 
 class survey extends Component {
     constructor(props) {
@@ -128,7 +130,10 @@ class survey extends Component {
         return (
 
             this.state.showComponent ?
-                <Report val={this.state} /> :
+                <Redirect to={{
+                    pathname: '/report',
+                    state: this.state
+                }} /> :
 
                 <div class="survey">
                     <div class="transparent-box">
