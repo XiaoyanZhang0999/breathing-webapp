@@ -15,7 +15,8 @@ class ColorTest extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            testState: {}
+            testState: {},
+            started:false
         };
     }
 
@@ -26,28 +27,31 @@ class ColorTest extends Component {
     }
 
     onCamLocked = () => {
-        this.setState({
-            start: true
-        })
+
+        if(!this.state.started){
+            setInterval(function () {
+                var div = document.querySelector("#counter");
+                var count = div.textContent * 1 - 1;
+                div.textContent = count;
+                if (count <= 0) {
+                    window.location.replace('transition');
+                }
+            }, 1000);
+            this.setState({
+                started: true
+            })
+        }
     }
 
     componentDidMount() {
-        setInterval(function () {
-            var div = document.querySelector("#counter");
-            var count = div.textContent * 1 - 1;
-            div.textContent = count;
-            if (count <= 0) {
-                window.location.replace('transition');
-            }
-        }, 1000);
     }
 
     render() {
         const { testState } = this.state;
-        const { start } = this.state;
+        const { started } = this.state;
         return (
             <div >
-                {start? <div class="randColor"  > <Colors start={start} onTestUpdate={this.onTestUpdate} /></div> : <div class="randColor"  ></div>} }
+                {started? <div class="randColor"  > <Colors start={started} onTestUpdate={this.onTestUpdate} /></div> : <div class="randColor"  ></div>} }
                 <div style={{bottom:0, position:"absolute",right: 0,border: "5px solid white;"}} > <CameraFeed onCamLocked={this.onCamLocked} testState={testState} /></div>
                 <div id="counter" style={{ top:0,position:"absolute"}}>30</div>    
             </div>

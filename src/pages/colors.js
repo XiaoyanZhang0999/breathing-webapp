@@ -8,7 +8,7 @@ const colorMap = {
     "#00FF00": "LIGHTGREEN",
     "#999999": "GREY"
 }
-
+const FREQ = 1500;
 
 class Colors extends Component {
 
@@ -47,7 +47,7 @@ class Colors extends Component {
             mSelf.setState({
                 color: color
             })
-        }, 1500);
+        }, FREQ);
     }
 
 

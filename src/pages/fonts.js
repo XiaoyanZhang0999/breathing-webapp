@@ -1,7 +1,7 @@
 import React, { Component } from "react"
 
 
-const FREQ = 700;
+const FREQ = process.env.REACT_APP_COLOR_FREQ || 700;
 const RANGE = 8;
 const TEXT = "I AM"
 class Fonts extends Component {
