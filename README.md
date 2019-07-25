@@ -1,6 +1,14 @@
 ## TODO for master branch:
 - Fix the report page css. <br>
 
+## PROBLEMS FOR CSS:
+### personalinfo.js
+- At line 90, `h3` tag is not decorated properly. <br>
+- At line 131, `button` is not decorated properly. <br>
+
+### report.js
+- see slack for image
+
 ## Done:
 - Integrate all the changes from camintegration and realtimeresults branch. 7/22 <br>
 
