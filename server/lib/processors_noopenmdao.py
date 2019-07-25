@@ -27,7 +27,7 @@ class findFaceGetPulse(object):
 
         #frames per second
         self.fps = 0
-
+        self.isLocked = False #YSN
         #time alloted for processing time
         self.buffer_size = 250
         #self.window = np.hamming(self.buffer_size)
@@ -174,10 +174,13 @@ class findFaceGetPulse(object):
        #         self.find_faces = False
             if len(detected) > 0:
                 self.find_faces = False
-            return
+            self.isLocked = False #YSN
+            return -1
         if set(self.face_rect) == set([1, 1, 2, 2]):
-            return
+            self.isLocked = False #YSN
+            return -1
              
+        self.isLocked = True #YSN
         cv2.putText(self.frame_out, "Locked! Don't Move", (10, 25), cv2.FONT_HERSHEY_PLAIN, 1.25, col)
 
         #cv2.putText(
@@ -270,3 +273,5 @@ class findFaceGetPulse(object):
                 tsize = 1
                 cv2.putText(self.frame_out, text,
                         (int(x - w / 2), int(y)), cv2.FONT_HERSHEY_PLAIN, tsize, col)
+                return self.bpm
+        return -1

@@ -178,7 +178,7 @@ class getCustomPulseApp(object):
         # set current image frame to the processor's input
         self.processor.frame_in = frame
         # process the image frame to perform all needed analysis
-        self.processor.run()
+        bpm = self.processor.run()
         # collect the output frame for display
         output_frame = self.processor.frame_out
 
@@ -197,7 +197,11 @@ class getCustomPulseApp(object):
 
         # handle any key presses
         # self.key_handler()
-        return output_frame
+
+        d = dict();  
+        d['frame'] = output_frame
+        d['bpm'] = bpm
+        return d
 
 
 

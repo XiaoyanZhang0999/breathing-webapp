@@ -26,11 +26,7 @@ def site():
 
 @socketio.on('frame')
 def handle_frame(payload):
-<<<<<<< HEAD
-    print('data: ' + str(payload))
-=======
-    #print('data: ' + str(payload))
->>>>>>> realtimeresults
+#    print('data: ' + str(payload))
     b64 = payload['b64']
     testState = payload['testState']
 
@@ -44,8 +40,11 @@ def handle_frame(payload):
         img = np.array(list(img))
         img_array = np.array(img, dtype = np.uint8)
         frame = cv2.imdecode(img_array, 1)
-        imout = pulse.process(frame)
-        bpm = pulse.processor.bpm
+        result = pulse.process(frame)
+        imout = result["frame"]
+        bpm = result["bpm"] #pulse.processor.bpm
+        isLocked = pulse.processor.isLocked
+        print("bpm "+str(bpm))
         retval, buf = cv2.imencode('.jpg',imout)
         b64out = base64.b64encode(buf)
       #  file = 'imageout-'+time.strftime("%H%M%S")+'.jpg'
@@ -56,6 +55,7 @@ def handle_frame(payload):
         payload['b64'] = b64out.decode('utf-8')
         payload['testState'] = testState
         payload['bpm'] = bpm
+        payload['isLocked'] = isLocked
         emit('response',payload)
     except Exception as e:
         print(e)
