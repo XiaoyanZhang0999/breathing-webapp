@@ -22,15 +22,25 @@ class Colors extends Component {
 
 
     componentDidMount() {
+       this.start()
+    }
+
+    getRandomColor() {
+        var index = Math.round(Math.random() * 5);
+        const colors = Object.keys(colorMap);
+        return colors[index - 1];
+    }
+
+    start(){
         const mSelf = this;
         setInterval(() => {
             let color = mSelf.getRandomColor();
             let testUpdate = {
                 date: new Date().getTime(),
                 id: color,
-                data: {
-                    color: color,
-                    name: colorMap[color]
+                label:{
+                    text: colorMap[color],
+                    style:{backgroundColor:color,color:"white",width:"130px"}
                 }
             }
             mSelf.props.onTestUpdate(testUpdate);
@@ -40,17 +50,10 @@ class Colors extends Component {
         }, 1500);
     }
 
-    getRandomColor() {
-        var index = Math.round(Math.random() * 5);
-        const colors = Object.keys(colorMap);
-        return colors[index - 1];
-    }
-
 
 
     render() {
         const { color } = this.state;
-        console.log(color)
         return (
             <div style={{ backgroundColor: color, "height": "100vh" }} >
             </div>

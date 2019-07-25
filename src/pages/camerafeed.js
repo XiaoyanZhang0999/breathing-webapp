@@ -2,6 +2,12 @@ import React from "react";
 import Webcam from "react-webcam";
 import socketIOClient from "socket.io-client";
 
+
+const tableStyle = {border:0,cellspacing:0,cellpadding:0,backgroundColor:"black"};
+
+const frame_width = 320;
+const frame_height = 240;
+
 class CameraFeed extends React.Component {
   setRef = webcam => {
     this.webcam = webcam;
@@ -11,8 +17,9 @@ class CameraFeed extends React.Component {
     super(props);
     this.state = {
       src: null,
-      endpoint: "https://breathing.appacea.com",
-      result:  {}   
+      endpoint: "localhost:5000", //"https://breathing.appacea.com",
+      result:  {}   ,
+      isLocked: false
     }; 
   }
 
@@ -25,9 +32,8 @@ class CameraFeed extends React.Component {
       socket.emit('my event', { data: 'I\'m connected!' });
 
       setInterval(() => {
-        //console.log("sending frame with "+JSON.stringify(mSelf.props.testState))
         var frame = mSelf.getFrame()
-        if (mSelf.props.testState.id && frame && frame.indexOf('data:image\/jpeg') !== -1) {
+        if ( frame && frame.indexOf('data:image\/jpeg') !== -1) { //TODO: check mSelf.props.testState.id ??
           frame = frame.replace(/^data:image\/jpeg;base64,/, "");
           if (frame && frame !== "") {
             socket.emit('frame', { b64: frame, testState: mSelf.props.testState });
@@ -37,25 +43,38 @@ class CameraFeed extends React.Component {
     });
 
     socket.on('response', function (response) {
-      //console.log("response "+JSON.stringify(response))
       let id = response.testState.id;
       let name = ((response.testState || {}).data || {}).name;
       let bpm = response.bpm;
-      const { result } = mSelf.state;
+      let isLocked = response.isLocked;
+      let label = response.testState.label;
 
-      if (result[id]) {
-        result[id].name = name || id;
-        result[id].bpm += bpm;
-        result[id].frames++;
+      console.log(response.testState)
+      const { result } = mSelf.state;
+      if(id){
+        if (result[id]) {
+          if(bpm !== -1 && bpm !== 0){
+            result[id].bpm += bpm;
+            //result[id].bpms.push(bpm);
+            result[id].frames++;
+          }
+        }
+        else {
+          result[id] = {label:label, bpm: bpm, name: name || id, frames: 0, bpms:[] };
+        }
+
       }
-      else {
-        result[id] = { bpm: bpm, name: name || id, frames: 0 };
+      if(isLocked){
+        mSelf.props.onCamLocked();
       }
-      console.log("result " + id)
       mSelf.setState({
         src: 'data:image/jpeg;base64,' + response.b64,
-        result: result
+        result: result,
+        isLocked: isLocked
       });
+
+
+
     });
 
   }
@@ -68,38 +87,49 @@ class CameraFeed extends React.Component {
 
   render() {
     const videoConstraints = {
-      width: 480,
-      height: 640,
       facingMode: "user"
     };
     const { src } = this.state;
-
     const { result } = this.state;
-    console.log(JSON.stringify(result))
+    const { isLocked } = this.state;
     return (
-      <div style={{ display: 'flex' }}>
-        <Webcam
-          audio={false}
-          height={640}
-          ref={this.setRef}
-          screenshotFormat="image/jpeg"
-          width={480}
-          videoConstraints={videoConstraints}
-        />
-
-        <img id="feed" src={src}></img>
-        <table>
-          <tbody>{Object.keys(result).map(function (key, index) {
-            return (
-              <tr key={key}>
-                <td>{result[key].name}</td>
-                <td>{result[key].bpm / result[key].frames}</td>
-              </tr>
-            )
-
-          })}</tbody>
-        </table>
-      </div>);
+<div >
+   <div style={{position:"absolute",zIndex:1}}>
+      <Webcam
+         audio={false}
+         height={frame_height}
+         width={frame_width}
+         ref={this.setRef}
+         screenshotFormat="image/jpeg"
+         videoConstraints={videoConstraints}
+         />
+   </div>
+   <div style={{position:"relative",zIndex:2}}>
+   <table style={tableStyle}>
+      <tbody>
+         <tr >
+            <td style={{color:"white"}}>
+               <img style={{paddingTop:"2px"}} height={frame_height} width={frame_width} id="feed" src={src}></img>
+            </td>
+            <td >
+               <table  height={frame_height} width={frame_width} >
+                  <tbody>
+                     {Object.keys(result).map(function (key, index) {
+                     return (
+                     <tr key={key}>
+                        <td class={(result[key].label||{}).class} style={(result[key].label||{}).style?(result[key].label||{}).style:{backgroundColor:"black",color:"white",width:"130px"}}>{(result[key].label||{}).text}</td>
+                        <td style={{color:"white"}}>{result[key].frames>0?result[key].bpm / result[key].frames:0}</td>
+                     </tr>
+                     )
+                     })}
+                  </tbody>
+               </table>
+            </td>
+         </tr>
+      </tbody>
+   </table>
+   </div>
+</div>);
   }
 }
 

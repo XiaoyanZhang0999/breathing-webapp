@@ -2,6 +2,7 @@
   box-sizing: border-box;
 }
 
+
 %_opensans__base{
   font-family: opensans;
 }
@@ -21,9 +22,10 @@
   font-family:"Arial", Gadget, sans-serif;
 }
 
+
 .random{
   width: 900px;
-  height: auto;
+  height: 100%;
   padding: 40px;
   margin: 0 auto;
   font-size: 100px;
@@ -33,42 +35,41 @@
     width: 25%;
     float: left;
     text-align: center;
-    height: auto;
+    height: 100%;
     padding: 10px;
-    font-size: 25px;
+    font-size: 200px;
   }
 
   .font__1{
-    @extend %_opensans__base;
+    font-family: opensans;
     font-weight: normal;
   }
   .font__2{
-    @extend %_opensans__base;
+    font-family: opensans;
     font-weight: bolder;
   }
   .font__3{
-    @extend %_impact__base;
+    font-family: "Comic Sans MS", cursive;
   }
   .font__4{
-    @extend %_comic__base;
+    font-family: "Comic Sans MS", cursive;
   }
   .font__5{
-    @extend %_mono__base;
+    font-family: monospace;
   }
   .font__6{
-    @extend %_mono__base;
+    font-family: monospace;
     font-weight: bolder;
   }
   .font__7{
-    @extend %_arial__base;
+    font-family:"Arial", Gadget, sans-serif;
     font-weight: 200;
   }
   .font__8{
-    @extend %_arial__base;
+    font-family:"Arial", Gadget, sans-serif;
     font-weight: bold;
     font-style: italic;
   }
-}
 
 .console{
   float:left;

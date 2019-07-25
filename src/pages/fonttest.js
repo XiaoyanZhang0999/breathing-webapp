@@ -1,14 +1,14 @@
 import React, { Component } from "react"
-import Colors from './colors';
+import Fonts from './fonts';
 import CameraFeed from './camerafeed';
-import '../statics/colors.css'
+import '../statics/fonts.css'
 
 
 /**
  * Start test and run webcam
  */
 
-class ColorTest extends Component {
+class FontTest extends Component {
 
 
 
@@ -37,7 +37,7 @@ class ColorTest extends Component {
             var count = div.textContent * 1 - 1;
             div.textContent = count;
             if (count <= 0) {
-                window.location.replace('transition');
+                window.location.replace('survey');
             }
         }, 1000);
     }
@@ -47,7 +47,7 @@ class ColorTest extends Component {
         const { start } = this.state;
         return (
             <div >
-                {start? <div class="randColor"  > <Colors start={start} onTestUpdate={this.onTestUpdate} /></div> : <div class="randColor"  ></div>} }
+                {start? <div class="randColor"  > <Fonts start={start} onTestUpdate={this.onTestUpdate} /></div> : <div class="randColor"  ></div>} 
                 <div style={{bottom:0, position:"absolute",right: 0,border: "5px solid white;"}} > <CameraFeed onCamLocked={this.onCamLocked} testState={testState} /></div>
                 <div id="counter" style={{ top:0,position:"absolute"}}>30</div>    
             </div>
@@ -56,4 +56,4 @@ class ColorTest extends Component {
 
 }
 
-export default ColorTest;
+export default FontTest;
