@@ -8,7 +8,7 @@ const colorMap = {
     "#00FF00": "LIGHTGREEN",
     "#999999": "GREY"
 }
-const FREQ = 1500;
+const FREQ = process.env.REACT_APP_COLOR_FREQ || 1500;
 
 class Colors extends Component {
 
